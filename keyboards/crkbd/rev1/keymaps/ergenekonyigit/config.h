@@ -22,8 +22,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //#define USE_MATRIX_I2C
 
+// Tap-hold tuning for reliable Mod-Tap behavior (e.g., CTL_T(KC_ESC))
+// Increase tapping term a bit to help distinguish quick taps from holds.
+// Adjust to taste (150–220ms is common for home-row mods).
 //#define QUICK_TAP_TERM 0
-//#define TAPPING_TERM 100
+#define TAPPING_TERM 200
+
+// Prefer hold when another key is pressed while holding a Mod-Tap.
+// This makes chords like Ctrl+S followed by Ctrl+W reliable when using CTL_T(KC_ESC).
+#define HOLD_ON_OTHER_KEY_PRESS
+
+// Ensure that once a Mod-Tap acts as a hold during a chord, releasing it first
+// won't send the tap keycode (prevents accidental Esc when rolling off).
+#define TAPPING_FORCE_HOLD
 
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING

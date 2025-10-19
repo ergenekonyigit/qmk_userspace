@@ -74,6 +74,27 @@ Note: The encoder mapping references RGB value up/down helpers; if RGB Matrix/Li
 
 ---
 
+## Mod-Tap behavior (tap Esc / hold Ctrl)
+
+This keymap uses `CTL_T(KC_ESC)` on the left home-row A position: tapping sends Escape; holding acts as Left Control. To make multi-key chords like Ctrl+S then Ctrl+W reliable (without accidental Esc), the following settings are enabled in `config.h`:
+
+-   `#define TAPPING_TERM 200` – a comfortable window to detect taps vs. holds.
+-   `#define HOLD_ON_OTHER_KEY_PRESS` – if another key is pressed while holding the Mod-Tap, it’s treated as a hold (Ctrl), making chords consistent.
+-   `#define TAPPING_FORCE_HOLD` – once used as a hold during a chord, releasing won’t send the tap key (prevents stray Esc on roll-off).
+
+How to test:
+
+-   Hold the A key (Mod-Tap).
+-   Press S, then (optionally still holding) press W.
+-   Result should be Ctrl+S and Ctrl+W with no Esc events.
+
+Optional tuning:
+
+-   If you prefer snappier taps, lower `TAPPING_TERM` (e.g., 170–180). If you need more forgiveness, raise it slightly.
+-   You may also experiment with `PERMISSIVE_HOLD` (treats early releases as holds in some rolls), but it can increase unintended holds for fast typists. Use only if needed in addition to the above.
+
+---
+
 ## Build options
 
 From `rules.mk`:
@@ -89,26 +110,33 @@ Target: crkbd/rev1 • Keymap: ergenekonyigit
 
 ### Compile
 
-```fish
-qmk compile -kb crkbd/rev1 -km ergenekonyigit
+### Overview
+
+-   Base layout: QWERTY with home-row Control on the left A position (tap Escape, hold Control).
+-   Three momentary layers for symbols/media (1), numbers/F-keys (2), and navigation (3), plus an Adjust layer.
+-   Thumb keys: Left Alt, Left GUI, Space on the base layer; right thumbs are momentary layer keys MO(\_FIRST), MO(\_SECOND), MO(\_THIRD).
+
 ```
+### 1 — Symbols & Media (MO(_FIRST))
+-   Symbols and punctuation: ~ ! @ # $ % ^ & * ( ) and more, with brackets - = ` [ ] \
+-   Media controls: Prev/Play-Pause/Next, Mute, Vol-, Vol+; Screen Brightness ±.
+-   Right thumb includes MO(_ADJUST) from this layer.
 
-Alternatively, using make:
-
-```fish
-make crkbd/rev1:ergenekonyigit
-```
-
+### 2 — Numbers & Function Keys (MO(_SECOND))
+-   Numbers 1–0 on the top rows.
+-   Function keys F1–F12 on the right half.
+-   Right thumb includes MO(_ADJUST) from this layer.
 ### Enter bootloader
+### 3 — Navigation (MO(_THIRD))
+-   Arrow keys on both halves for convenience (Left/Down/Up/Right).
+-   Quick nav/edit style with Tab, Backspace, and Enter remaining accessible.
 
--   Use the QK_BOOT key on the Adjust layer, or
--   Press your controller’s physical reset/boot pins/buttons as applicable.
-
-### Flash
-
-QMK will guide flashing after compile if you used `qmk compile` with `-e CONVERT_TO` or `qmk flash`. Example direct flash:
-
-```fish
+## Quick reference
+-   Base: QWERTY with tap Esc/hold Ctrl on the left home A key.
+-   Layer 1: Symbols, brightness, media; MO(_ADJUST) on the right thumb.
+-   Layer 2: Numbers and F-keys; MO(_ADJUST) on the right thumb.
+-   Layer 3: Navigation & arrows.
+-   Adjust: Bootloader access (QK_BOOT).
 qmk flash -kb crkbd/rev1 -km ergenekonyigit
 ```
 
