@@ -2,15 +2,16 @@
 
 ![keyboard](./keyboard.jpeg)
 
-### Overview
+## Overview
 
--   Base layout: QWERTY with home-row Control on the left A position (tap Escape, hold Control).
--   Three momentary layers for navigation (1), symbols/media (2), and numbers/F-keys (3), plus an Adjust layer.
--   Thumb keys: Left Alt, Left GUI, Space on the base layer; right thumbs are momentary layer keys MO(\_FIRST), MO(\_SECOND), MO(\_THIRD).
+-   Base layout: QWERTY with a home-row Control on the left A position (tap Escape, hold Control).
+-   Layers: NAV via LT on Space, plus right-thumb momentary layers for Symbols (1), Numbers (2), Function/Media (3), and an Adjust layer.
+-   Thumb keys (base): Left Alt, Left GUI, Space • Right: MO(\_SYM), MO(\_NUM), MO(\_FUNC).
 
-Special key behaviors used in this keymap:
+Key behaviors used:
 
 -   CTL_T(KC_ESC): Tap = Escape, Hold = Left Control.
+-   LT(layer, key): Tap sends the key, hold activates the layer (Space acts as NAV when held).
 -   MO(layer): Hold to access the layer; release to return.
 -   QK_BOOT: Enter bootloader (for flashing firmware).
 
@@ -20,87 +21,89 @@ Special key behaviors used in this keymap:
 
 ### 0 — QWERTY (Base)
 
--   Standard QWERTY alpha keys.
--   Left home row A key is CTL_T(KC_ESC) for tap Esc / hold Ctrl.
--   Punctuation on the right; Backspace on the top-right; Enter on the bottom-right.
--   Thumbs: LAlt, LGUI, Space (left) • MO(1), MO(2), MO(3) (right).
+-   Standard QWERTY alphas.
+-   Left home-row A key is CTL_T(KC_ESC) for tap Esc / hold Ctrl.
+-   Right side punctuation; Backspace top-right; Enter bottom-right.
+-   Thumbs: LAlt, LGUI, Space (LT(\_NAV, KC_SPC)) • Right: MO(\_SYM), MO(\_NUM), MO(\_FUNC).
 
-### 1 — Navigation (MO(\_FIRST))
+### NAV — Navigation (via LT on Space)
 
--   Arrow keys on both halves for convenience (Left/Down/Up/Right).
--   Quick nav/edit style with Tab, Backspace, and Enter remaining accessible.
+-   Arrow keys on both halves (Left/Down/Up/Right) for quick navigation.
 
-### 2 — Symbols & Media (MO(\_SECOND))
+### 1 — Symbols (MO(\_SYM))
 
--   Top row symbols: ~ ! @ # $ % | ^ & \* ( )
--   Brackets and punctuation: - = ` [ ] \
--   Media controls: Prev/Play-Stop/Next, Mute, Vol-, Vol+; Screen Brightness ±.
--   Right thumb includes MO(\_ADJUST) from this layer.
+-   Symbols row: ~ ! @ # $ % ^ & \* ( )
+-   Brackets/punctuation: - = ` [ ] \
+-   Right thumb includes MO(\_ADJUST).
 
-### 3 — Numbers & Function Keys (MO(\_THIRD))
+### 2 — Numbers & Function Keys (MO(\_NUM))
 
--   Numbers 1–0 on the top rows.
+-   Numbers 1–0.
 -   Function keys F1–F12 on the right half.
--   Right thumb includes MO(\_ADJUST) from this layer.
+-   Right thumb includes MO(\_ADJUST).
+
+### 3 — Function / Media / Mouse (MO(\_FUNC))
+
+-   Brightness ±, Media keys (Prev/Play/Pause/Next, Mute, Vol±).
+-   Mouse wheel and cursor controls (requires MOUSEKEY_ENABLE).
 
 ### Adjust (MO(\_ADJUST))
 
--   QK_BOOT on the top-left to enter bootloader.
--   Other positions are unassigned placeholders (XXXXXXX) for future customization.
+-   QK_BOOT for bootloader access.
+-   Remaining keys reserved for future customization.
 
 ---
 
-## Encoders (optional)
+## Combos (enabled on QWERTY only)
 
-If ENCODER_MAP_ENABLE is enabled at build time, the map provides per-layer rotations:
+Characters produced when pressing the pair simultaneously:
 
--   CCW/CW: Volume Down/Up
--   CCW/CW: Media Prev/Next
--   CCW/CW: RGB Value Down/Up (e.g., RM_VALD/RM_VALU)
--   CCW/CW: Arrow Right/Left
+-   R + T → ( (KC_LPRN)
+-   Y + U → ) (KC_RPRN)
+-   F + G → [ (KC_LBRC)
+-   H + J → ] (KC_RBRC)
+-   V + B → { (KC_LCBR)
+-   N + M → } (KC_RCBR)
 
-These four encoder definitions repeat across layers 0–3.
+Notes:
 
----
+-   These combos trigger only when the QWERTY layer is active (enforced via `combo_should_trigger` in keymap.c).
+-   If you want to adjust the timing window, use the commented line in `config.h`:
+    -   `// #define COMBO_TERM 200` (uncomment to customize)
 
-## RGB Lighting
+### Quick table
 
-From `config.h` (active when RGBLIGHT_ENABLE is set in your keyboard/keymap build):
+| Chord | Output |
+| ----: | :----- |
+| R + T | (      |
+| Y + U | )      |
+| F + G | [      |
+| H + J | ]      |
+| V + B | {      |
+| N + M | }      |
 
--   Enabled effects: Breathing, Rainbow Mood/Swirl, Snake, Knight, Christmas, Static Gradient, RGB Test, Alternating, Twinkle.
--   Value limit: 120; Steps — Hue: 10, Saturation: 17, Value: 17.
+Tips:
 
-Note: The encoder mapping references RGB value up/down helpers; if RGB Matrix/Light isn’t compiled in, those actions will be no-ops.
-
----
-
-## Mod-Tap behavior (tap Esc / hold Ctrl)
-
-This keymap uses `CTL_T(KC_ESC)` on the left home-row A position: tapping sends Escape; holding acts as Left Control. To make multi-key chords like Ctrl+S then Ctrl+W reliable (without accidental Esc), the following settings are enabled in `config.h`:
-
--   `#define TAPPING_TERM 200` – a comfortable window to detect taps vs. holds.
--   `#define HOLD_ON_OTHER_KEY_PRESS` – if another key is pressed while holding the Mod-Tap, it’s treated as a hold (Ctrl), making chords consistent.
--   `#define TAPPING_FORCE_HOLD` – once used as a hold during a chord, releasing won’t send the tap key (prevents stray Esc on roll-off).
-
-How to test:
-
--   Hold the A key (Mod-Tap).
--   Press S, then (optionally still holding) press W.
--   Result should be Ctrl+S and Ctrl+W with no Esc events.
-
-Optional tuning:
-
--   If you prefer snappier taps, lower `TAPPING_TERM` (e.g., 170–180). If you need more forgiveness, raise it slightly.
--   You may also experiment with `PERMISSIVE_HOLD` (treats early releases as holds in some rolls), but it can increase unintended holds for fast typists. Use only if needed in addition to the above.
+-   If rapid chords with close keys are hard to trigger, try increasing `COMBO_TERM` (e.g., 180–230 ms).
+-   For overlapping chords (combos sharing keys), the longer chord takes precedence; simplify your chord set if necessary.
 
 ---
 
-## Build options
+## Mod-Tap: tap Esc / hold Ctrl
 
-From `rules.mk`:
+For a stable Mod-Tap experience, the following are enabled in `config.h`:
 
--   MOUSEKEY_ENABLE = no
--   EXTRAKEY_ENABLE = yes (enables media keys, etc.)
+-   `#define TAPPING_TERM 200`
+-   `#define HOLD_ON_OTHER_KEY_PRESS`
+-   `#define TAPPING_FORCE_HOLD`
+
+---
+
+## Build options (rules.mk)
+
+-   MOUSEKEY_ENABLE = yes
+-   EXTRAKEY_ENABLE = yes
+-   COMBO_ENABLE = yes
 
 ---
 
@@ -108,48 +111,26 @@ From `rules.mk`:
 
 Target: crkbd/rev1 • Keymap: ergenekonyigit
 
-### Compile
+### Build
 
-### Overview
-
--   Base layout: QWERTY with home-row Control on the left A position (tap Escape, hold Control).
--   Three momentary layers for symbols/media (1), numbers/F-keys (2), and navigation (3), plus an Adjust layer.
--   Thumb keys: Left Alt, Left GUI, Space on the base layer; right thumbs are momentary layer keys MO(\_FIRST), MO(\_SECOND), MO(\_THIRD).
-
+```fish
+qmk compile -kb crkbd/rev1 -km ergenekonyigit
 ```
-### 1 — Symbols & Media (MO(_FIRST))
--   Symbols and punctuation: ~ ! @ # $ % ^ & * ( ) and more, with brackets - = ` [ ] \
--   Media controls: Prev/Play-Pause/Next, Mute, Vol-, Vol+; Screen Brightness ±.
--   Right thumb includes MO(_ADJUST) from this layer.
 
-### 2 — Numbers & Function Keys (MO(_SECOND))
--   Numbers 1–0 on the top rows.
--   Function keys F1–F12 on the right half.
--   Right thumb includes MO(_ADJUST) from this layer.
-### Enter bootloader
-### 3 — Navigation (MO(_THIRD))
--   Arrow keys on both halves for convenience (Left/Down/Up/Right).
--   Quick nav/edit style with Tab, Backspace, and Enter remaining accessible.
+### Flash
 
-## Quick reference
--   Base: QWERTY with tap Esc/hold Ctrl on the left home A key.
--   Layer 1: Symbols, brightness, media; MO(_ADJUST) on the right thumb.
--   Layer 2: Numbers and F-keys; MO(_ADJUST) on the right thumb.
--   Layer 3: Navigation & arrows.
--   Adjust: Bootloader access (QK_BOOT).
+```fish
 qmk flash -kb crkbd/rev1 -km ergenekonyigit
 ```
 
-For split boards, flash each half as required by your MCU/bootloader (e.g., Pro Micro/Elite-C/Nice!Nano procedures).
+For split boards, flash each half according to your MCU/bootloader procedure (e.g., Pro Micro/Elite-C/Nice!Nano).
 
 ---
 
 ## Quick reference
 
--   Base: QWERTY with tap Esc/hold Ctrl on the left home A key.
--   Layer 1: Navigation & arrows.
--   Layer 2: Symbols, brightness, media; MO(\_ADJUST) on the right thumb.
--   Layer 3: Numbers and F-keys; MO(\_ADJUST) on the right thumb.
--   Adjust: Bootloader access (QK_BOOT).
+-   Base: QWERTY; A = tap Esc / hold Ctrl.
+-   NAV: while holding Space.
+-   1: Symbols • 2: Numbers/F-keys • 3: Function/Media/Mouse • Adjust: Bootloader (QK_BOOT).
 
-Customize freely by editing `keymap.c`, `config.h`, and `rules.mk` in this folder.
+Feel free to customize by editing `keymap.c`, `config.h`, and `rules.mk` in this folder.
