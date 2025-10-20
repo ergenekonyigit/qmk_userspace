@@ -138,14 +138,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | shift |       |       |       |       |       |       |       |       |       |       |       |       |
  * '-----------------------------------------------'       '-----------------------------------------------'
  *                         ,-----------------------,       ,-----------------------,
- *                         |  opt  |  cmd  | (nav) |       |       |       |       |
+ *                         |  opt  |  cmd  | (nav) |       | space |  cmd  |  opt  |
  *                         '-----------------------'       '-----------------------'
  */
   [_NAV] = LAYOUT_split_3x6_3(
     KC_TAB,   XXXXXXX,  XXXXXXX,  KC_UP,    XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  KC_UP,    XXXXXXX,  XXXXXXX,  XXXXXXX,
     KC_LCTL,  XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,     XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,
     KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-                                  KC_LALT,  KC_LGUI,  _______,     XXXXXXX,  XXXXXXX,  XXXXXXX
+                                  KC_LALT,  KC_LGUI,  _______,     KC_SPC,   KC_RGUI,  KC_RALT
   ),
 
   /* function layer
