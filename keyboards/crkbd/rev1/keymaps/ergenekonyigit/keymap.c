@@ -156,13 +156,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | prev  |ply/pau| next  | mute  | vol-  | vol+  |       |ms_left|ms_down| ms_up |ms_rght|ms_btn1|ms_btn2|
  * '-----------------------------------------------'       '-----------------------------------------------'
  *                         ,-----------------------,       ,-----------------------,
- *                         |  opt  |  cmd  | space |       |       |       |(func) |
+ *                         |  opt  |  cmd  | space |       |       |    (func)     |
  *                         '-----------------------'       '-----------------------'
  */
   [_FUNC] = LAYOUT_split_3x6_3(
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BRID,  KC_BRIU,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  QK_BOOT,
     XXXXXXX,  XXXXXXX,  MS_WHLL,  MS_WHLD,  MS_WHLU,  MS_WHLR,     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  XXXXXXX,  XXXXXXX,
     KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,     MS_LEFT,  MS_DOWN,  MS_UP,    MS_RGHT,  MS_BTN1,  MS_BTN2,
-                                  KC_LALT,  KC_LGUI,  KC_SPC,      XXXXXXX,  XXXXXXX,  _______
+                                  KC_LALT,  KC_LGUI,  KC_SPC,      XXXXXXX,  _______,  _______
   )
 };
