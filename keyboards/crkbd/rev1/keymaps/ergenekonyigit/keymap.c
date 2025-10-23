@@ -90,6 +90,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   KC_LALT,  KC_LGUI,  KC_SPC,    MO(_NAV),  MO(_SYM),  MO(_NUM)
   ),
 
+/* navigation layer
+ * ,-----------------------------------------------,       ,-----------------------------------------------,
+ * |  tab  |       |  up   |       |       |       |       |       |       |       |       |       | bkspc |
+ * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+ * | ctrl  | left  | down  | right |       |       |       | left  | down  |  up   | down  |       |       |
+ * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+ * | shift |       |       |       |       |       |       |       | left  | down  | right |       | enter |
+ * '-----------------------------------------------'       '-----------------------------------------------'
+ *                         ,-----------------------,       ,-----------------------,
+ *                         |  opt  |  cmd  | space |       | (nav) |       |       |
+ *                         '-----------------------'       '-----------------------'
+ */
+  [_NAV] = LAYOUT_split_3x6_3(
+    KC_TAB,   XXXXXXX,  KC_UP,    XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,
+    KC_LCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  XXXXXXX,  XXXXXXX,
+    KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  KC_ENT,
+                                  KC_LALT,  KC_LGUI,  KC_SPC,      _______,  XXXXXXX,  XXXXXXX
+  ),
+
 /* symbol layer
  * ,-----------------------------------------------,       ,-----------------------------------------------,
  * |   ~   |   !   |   @   |   #   |   $   |   %   |       |   ^   |   &   |   *   |   (   |   )   | bkspc |
@@ -128,26 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               KC_LALT,  KC_LGUI,  KC_SPC,      XXXXXXX,  MO(_FUNC),  _______,
   ),
 
-/* navigation layer
- * ,-----------------------------------------------,       ,-----------------------------------------------,
- * |  tab  |       |  up   |       |       |       |       |       |       |       |       |       | bkspc |
- * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
- * | ctrl  | left  | down  | right |       |       |       | left  | down  |  up   | down  |       |       |
- * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
- * | shift |       |       |       |       |       |       |       | left  | down  | right |       | enter |
- * '-----------------------------------------------'       '-----------------------------------------------'
- *                         ,-----------------------,       ,-----------------------,
- *                         |  opt  |  cmd  | space |       | (nav) |       |       |
- *                         '-----------------------'       '-----------------------'
- */
-  [_FIRST] = LAYOUT_split_3x6_3(
-    KC_TAB,   XXXXXXX,  KC_UP,    XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,
-    KC_LCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  XXXXXXX,  XXXXXXX,
-    KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  KC_ENT,
-                                  KC_LALT,  KC_LGUI,  KC_SPC,      _______,  XXXXXXX,  XXXXXXX
-  ),
-
-  /* function layer
+/* function layer
  * ,-----------------------------------------------,       ,-----------------------------------------------,
  * |       |       |       |       | bri-  | bri+  |       |       |       |       |       |       |qc_boot|
  * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
