@@ -113,9 +113,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------,       ,-----------------------------------------------,
  * |   ~   |   !   |   @   |   #   |   $   |   %   |       |   ^   |   &   |   *   |   (   |   )   | bkspc |
  * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
- * | ctrl  |       |       |       |       |       |       |   -   |   =   |   `   |   [   |   ]   |   \   |
+ * |   \   |   [   |   ]   |   `   |   =   |   -   |       |   -   |   =   |   `   |   [   |   ]   |   \   |
  * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |       |       |       |   _   |   +   |   ~   |   {   |   }   |   |   |
+ * |   |   |   {   |   }   |   ~   |   +   |   _   |       |   _   |   +   |   ~   |   {   |   }   |   |   |
  * '-----------------------------------------------'       '-----------------------------------------------'
  *                         ,-----------------------,       ,-----------------------,
  *                         |  opt  |  cmd  | space |       |       | (sym) |  num  |
@@ -123,8 +123,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_SYM] = LAYOUT_split_3x6_3(
       KC_TILD,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,     KC_CIRC,  KC_AMPR,  KC_PAST,  KC_LPRN,  KC_RPRN,  KC_BSPC,
-      KC_LCTL,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     KC_PMNS,  KC_EQL,   KC_GRV,   KC_LBRC,  KC_RBRC,  KC_BSLS,
-      KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     KC_UNDS,  KC_PPLS,  KC_TILD,  KC_LCBR,  KC_RCBR,  KC_PIPE,
+      KC_BSLS,  KC_LBRC,  KC_RBRC,  KC_GRV,   KC_EQL,   KC_PMNS,     KC_PMNS,  KC_EQL,   KC_GRV,   KC_LBRC,  KC_RBRC,  KC_BSLS,
+      KC_PIPE,  KC_LCBR,  KC_RCBR,  KC_TILD,  KC_PPLS,  KC_UNDS,     KC_UNDS,  KC_PPLS,  KC_TILD,  KC_LCBR,  KC_RCBR,  KC_PIPE,
                                     KC_LALT,  KC_LGUI,  KC_SPC,      XXXXXXX,  _______,  MO(_FUNC)
   ),
 
