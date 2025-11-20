@@ -65,33 +65,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | shift |   z   |   x   |   c   |   v   |   b   |       |   n   |   m   |   ,   |   .   |   /   |sft/ent|
  * '-----------------------------------------------'       '-----------------------------------------------'
  *                         ,-----------------------,       ,-----------------------,
- *                         |  opt  |  cmd  | space |       |  nav  |  sym  |  num  |
+ *                         |  opt  |  cmd  | space |       |       |  sym  |  num  |
  *                         '-----------------------'       '-----------------------'
  */
   [_QWERTY] = LAYOUT_split_3x6_3(
     KC_TAB,         KC_Q,  KC_W,  KC_E,     KC_R,     KC_T,      KC_Y,      KC_U,      KC_I,       KC_O,    KC_P,     KC_BSPC,
-    CTL_T(KC_ESC),  KC_A,  KC_S,  KC_D,     KC_F,     KC_G,      KC_H,      KC_J,      KC_K,       KC_L,    KC_SCLN,  KC_QUOT,
+    CTL_T(KC_ESC),  KC_A,  KC_S,  KC_D,     KC_F,     KC_G,      KC_H,      KC_J,      KC_K,       KC_L,    KC_SCLN,  LT(_NAV, KC_QUOT),
     KC_LSFT,        KC_Z,  KC_X,  KC_C,     KC_V,     KC_B,      KC_N,      KC_M,      KC_COMM,    KC_DOT,  KC_SLSH,  RSFT_T(KC_ENT),
-                                  KC_LALT,  KC_LGUI,  KC_SPC,    MO(_NAV),  MO(_SYM),  MO(_NUM)
+                                  KC_LALT,  KC_LGUI,  KC_SPC,    XXXXXXX,   MO(_SYM),  MO(_NUM)
   ),
 
 /* navigation layer
  * ,-----------------------------------------------,       ,-----------------------------------------------,
  * |  tab  |       |  up   |       |       |       |       |       |       |       |       |       | bkspc |
  * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
- * | ctrl  | left  | down  | right |       |       |       | left  | down  |  up   | down  |       |       |
+ * | ctrl  | left  | down  | right |       |       |       | left  | down  |  up   | down  |       | (nav) |
  * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
- * | shift |       |       |       |       |       |       |       | left  | down  | right |       | enter |
+ * | shift |       |       |       |       |       |       |       |       |       |       |       | enter |
  * '-----------------------------------------------'       '-----------------------------------------------'
  *                         ,-----------------------,       ,-----------------------,
- *                         |  opt  |  cmd  | space |       | (nav) |       |       |
+ *                         |  opt  |  cmd  | space |       |       |       |       |
  *                         '-----------------------'       '-----------------------'
  */
   [_NAV] = LAYOUT_split_3x6_3(
     KC_TAB,   XXXXXXX,  KC_UP,    XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,
-    KC_LCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  XXXXXXX,  XXXXXXX,
-    KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  KC_ENT,
-                                  KC_LALT,  KC_LGUI,  KC_SPC,      _______,  XXXXXXX,  XXXXXXX
+    KC_LCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  XXXXXXX,  _______,
+    KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_ENT,
+                                  KC_LALT,  KC_LGUI,  KC_SPC,      XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
 
 /* symbol layer
@@ -134,20 +134,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* function layer
  * ,-----------------------------------------------,       ,-----------------------------------------------,
- * |       |       |       |       | bri-  | bri+  |       |       |       |       |       |       |qc_boot|
+ * |       |       |ms_left| ms_up |ms_down|ms_rght|       |       |       |       |       |ms_btn1|ms_btn2|
  * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
- * |       |       |ms_whll|ms_whld|ms_whlu|ms_whlr|       |kc_left|kc_down| kc_up |kc_rght|       |       |
+ * |       |       |ms_whll|ms_whld|ms_whlu|ms_whlr|       | left  | down  |  up   | right |       |       |
  * |-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
- * | prev  |ply/pau| next  | mute  | vol-  | vol+  |       |ms_left|ms_down| ms_up |ms_rght|ms_btn1|ms_btn2|
+ * | prev  |ply/pau| next  | mute  | vol-  | vol+  |       |       |       |       |       |       |qc_boot|
  * '-----------------------------------------------'       '-----------------------------------------------'
  *                         ,-----------------------,       ,-----------------------,
  *                         |  opt  |  cmd  | space |       |       |    (func)     |
  *                         '-----------------------'       '-----------------------'
  */
   [_FUNC] = LAYOUT_split_3x6_3(
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BRID,  KC_BRIU,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  QK_BOOT,
+    XXXXXXX,  XXXXXXX,  MS_LEFT,  MS_UP,    MS_DOWN,  MS_RGHT,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  MS_BTN1,  MS_BTN2,
     XXXXXXX,  XXXXXXX,  MS_WHLL,  MS_WHLD,  MS_WHLU,  MS_WHLR,     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  XXXXXXX,  XXXXXXX,
-    KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,     MS_LEFT,  MS_DOWN,  MS_UP,    MS_RGHT,  MS_BTN1,  MS_BTN2,
+    KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  QK_BOOT,
                                   KC_LALT,  KC_LGUI,  KC_SPC,      XXXXXXX,  _______,  _______
   )
 };
